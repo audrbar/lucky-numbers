@@ -16,7 +16,6 @@ export const GlobalProvider = ({children}) => {
     useEffect(() => {
         setUpdate(Date.now());
         if (null !== response) {
-
             setMessage({text: response.message.text, type: response.message.type});
         }
     }, [response, setMessage, setUpdate]);
@@ -26,9 +25,7 @@ export const GlobalProvider = ({children}) => {
             setDelete,
             setCreate,
             list,
-            // start modals
             deleteModal, setDeleteModal, addModal, setAddModal, remModal, setRemModal,
-            // end modals
             setEdit,
             messages
         }}>

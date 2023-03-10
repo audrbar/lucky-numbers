@@ -13,14 +13,14 @@ code {
         monospace;
 }
 
-.modal {
-    display: block;
+.cust-modal {
+    display: block !important;
     background-color: #00000044;
 }
 
 .messages-bin {
     position: fixed;
-    bottom: 50px;
-    left: 50px;
+    left: 50%;
+    top: 5px;
     max-width: 300px;
 }

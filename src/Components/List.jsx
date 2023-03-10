@@ -31,15 +31,9 @@ function List() {
                                     </div>
                                 </div>
                             </div>
-
-
                         </li>))
                     }
-
-
                 </ul>
-
-                {/* <button className="btn btn-primary" onClick={add}>Add</button> */}
             </div>
         </div>
     )
