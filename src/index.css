@@ -24,3 +24,17 @@ code {
     top: 5px;
     max-width: 300px;
 }
+
+.navbar.navbar-expand-lg.navbar-light.bg-light .nav-link {
+    cursor: pointer;
+}
+
+.navbar.navbar-expand-lg.navbar-light.bg-light .nav-link:active {
+    color: skyblue;
+}
+
+.nav-top {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
