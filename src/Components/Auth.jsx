@@ -21,7 +21,7 @@ function Auth({ children }) {
                     setAuthName(null);
                 }
             });
-    }, [setAuthName, setLogged]);
+    }, []);
 
 
 

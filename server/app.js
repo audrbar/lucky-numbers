@@ -82,8 +82,6 @@ app.get('/login', (req, res) => {
       status: 'error',
     });
   }
-
-
 });
 
 
@@ -109,7 +107,6 @@ app.post('/numbers', (req, res) => {
     message: { text: 'New number is saved', 'type': 'success' }
   });
 });
-
 
 app.delete('/numbers/:id', (req, res) => {
   let allData = fs.readFileSync('./data/numbers.json', 'utf8');
