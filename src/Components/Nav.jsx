@@ -17,6 +17,11 @@ function Nav() {
                                     'nav-link' + (route === 'numbers' ? ' active' : '')
                                 }>Numbers</span>
                             </li>
+                                <li className="nav-item">
+                                <span onClick={_ => setRoute('users')} className={
+                                    'nav-link' + (route === 'users' ? ' active' : '')
+                                }>Numbers</span>
+                            </li>
                         </ul>
                     </div>
                     <ul className="navbar-nav">

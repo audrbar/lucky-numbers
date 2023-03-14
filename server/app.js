@@ -84,6 +84,12 @@ app.get('/login', (req, res) => {
   }
 });
 
+// users
+app.get('/users', (req, res) => {
+  let allData = fs.readFileSync('./data/users.json', 'utf8');
+  allData = JSON.parse(allData);
+  res.json(allData);
+});
 
 // API
 app.get('/numbers', (req, res) => {
