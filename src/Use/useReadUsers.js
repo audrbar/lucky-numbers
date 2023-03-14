@@ -6,7 +6,7 @@ const URL = 'http://localhost:3003/users';
 export const useReadUsers = _ => {
 
   const [list, setList] = useState(null);
-  const [update, setUpdateUsers] = useState(null);
+  const [update, setUpdate] = useState(null);
 
   useEffect(() => {
     if (null === update) {
@@ -17,5 +17,5 @@ export const useReadUsers = _ => {
   }, [update]);
 
 
-  return [list, setUpdateUsers];
+  return [list, setUpdate];
 }

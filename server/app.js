@@ -82,14 +82,10 @@ app.get('/login', (req, res) => {
       status: 'error',
     });
   }
+
+
 });
 
-// users
-app.get('/users', (req, res) => {
-  let allData = fs.readFileSync('./data/users.json', 'utf8');
-  allData = JSON.parse(allData);
-  res.json(allData);
-});
 
 // API
 app.get('/numbers', (req, res) => {
@@ -113,6 +109,7 @@ app.post('/numbers', (req, res) => {
     message: { text: 'New number is saved', 'type': 'success' }
   });
 });
+
 
 app.delete('/numbers/:id', (req, res) => {
   let allData = fs.readFileSync('./data/numbers.json', 'utf8');
@@ -139,6 +136,31 @@ app.put('/numbers/:action/:id', (req, res) => {
   fs.writeFileSync('./data/numbers.json', editedData, 'utf8');
 
   res.json({ message: { text: 'Number was edited', 'type': 'info' } });
+});
+
+
+// users
+app.get('/users', (req, res) => {
+  let allData = fs.readFileSync('./data/users.json', 'utf8');
+  allData = JSON.parse(allData);
+  res.json(allData);
+});
+
+app.post('/register', (req, res) => {
+  let allData = fs.readFileSync('./data/users.json', 'utf8');
+  allData = JSON.parse(allData);
+  const id = uuidv4();
+  const data = {
+    name: req.body.name,
+    psw: md5(req.body.psw),
+    id
+  };
+  allData.push(data);
+  allData = JSON.stringify(allData);
+  fs.writeFileSync('./data/users.json', allData, 'utf8');
+  res.json({
+    status: 'ok'
+  });
 });
 
 app.listen(port, () => {

@@ -8,6 +8,7 @@ function Auth({ children }) {
 
     const { setAuthName, logged, setLogged } = useContext(Global);
 
+
     useEffect(() => {
         axios.get('http://localhost:3003/login', { withCredentials: true })
             .then(res => {
@@ -22,9 +23,13 @@ function Auth({ children }) {
             });
     }, []);
 
+
+
+
     if (null === logged) {
         return <Loader />
     }
+
     if (true === logged) {
         return (
             <>
@@ -37,6 +42,7 @@ function Auth({ children }) {
             <Login />
         )
     }
+
 }
 
 export default Auth;

@@ -14,25 +14,38 @@ export const GlobalProvider = ({children}) => {
     const [list, setUpdate] = useRead();
     const [deleteModal, setDeleteModal, addModal, setAddModal, remModal, setRemModal] = useModal();
     const [messages, setMessage] = useMessages([]);
-    const [users, setUpdateUsers] = useReadUsers(null);
+
+    const [users, setUpdateUsers] = useReadUsers();
+
     const [route, setRoute] = useState('numbers');
-        const [logged, setLogged] = useState(null);
+    const [logged, setLogged] = useState(null);
     const [authName, setAuthName] = useState(null);
+
+
 
     useEffect(() => {
         setUpdate(Date.now());
         if (null !== response) {
+
             setMessage({text: response.message.text, type: response.message.type});
         }
     }, [response, setMessage, setUpdate]);
 
     useEffect(() => {
+
         if (route === 'users') {
             setUpdateUsers(Date.now());
+        } else if (route === 'numbers') {
+            setUpdate(Date.now());
         }
-    }, []);
 
-        const logOut = _ => {
+
+
+
+    }, [route])
+
+
+    const logOut = _ => {
         axios.post('http://localhost:3003/logout', {}, { withCredentials: true })
         .then(res => {
             console.log(res.data);
@@ -46,11 +59,16 @@ export const GlobalProvider = ({children}) => {
             setDelete,
             setCreate,
             list,
+            // start modals
             deleteModal, setDeleteModal, addModal, setAddModal, remModal, setRemModal,
+            // end modals
             setEdit,
             messages,
+            // route
             route, setRoute,
+            // auth
             authName, setAuthName, logOut, logged, setLogged,
+            //users
             users, setUpdateUsers
         }}>
             {children}

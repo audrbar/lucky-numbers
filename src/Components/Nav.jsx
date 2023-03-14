@@ -17,10 +17,10 @@ function Nav() {
                                     'nav-link' + (route === 'numbers' ? ' active' : '')
                                 }>Numbers</span>
                             </li>
-                                <li className="nav-item">
+                            <li className="nav-item">
                                 <span onClick={_ => setRoute('users')} className={
                                     'nav-link' + (route === 'users' ? ' active' : '')
-                                }>Numbers</span>
+                                }>Users</span>
                             </li>
                         </ul>
                     </div>
@@ -38,9 +38,14 @@ function Nav() {
                                     </>
                                 ) :
                                 (
-                                    <li className="nav-item">
-                                        <span onClick={_ => setRoute('login')} className="nav-link">Login</span>
-                                    </li>
+                                    <>
+                                        <li className="nav-item">
+                                            <span onClick={_ => setRoute('login')} className="nav-link">Login</span>
+                                        </li>
+                                        <li className="nav-item">
+                                            <span onClick={_ => setRoute('register')} className="nav-link">Register</span>
+                                        </li>
+                                    </>
                                 )
 
                         }
