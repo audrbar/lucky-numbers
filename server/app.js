@@ -22,7 +22,24 @@ app.use(
 );
 app.use(express.json());
 
+const doAuth = function (req, res, next) {
+  if (req.url.indexOf('/numbers') === 0) {
+    const users = JSON.parse(fs.readFileSync('./data/users.json', 'utf8'));
+    const user = req.cookies.magicNumberSession ?
+      users.find(u => u.session === req.cookies.magicNumberSession) :
+      null;
+    console.log(req.cookies)
+    if (user) {
+      next()
+    } else {
+      res.status(401).json({});
+    }
+  } else {
+    next();
+  }
+}
 
+app.use(doAuth);
 
 app.post('/cookie', (req, res) => {
 

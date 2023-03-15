@@ -7,7 +7,7 @@ import { Global } from './Global';
 
 function Auth({ children, roles }) {
 
-    const { rote, setAuthName, logged, setLogged } = useContext(Global);
+    const { route, setAuthName, logged, setLogged } = useContext(Global);
 
 
     useEffect(() => {
@@ -15,26 +15,27 @@ function Auth({ children, roles }) {
             .then(res => {
                 console.log(res.data);
                 if (res.data.status === 'ok') {
-                    setAuthName(res.data.name)
-                    if (roles.lengh) {
-                        if (roles.includes(res.data.role))
-                            setLogged(1)
-                    } else {
-                        setLogged(3)
-
-                    }
-                    setLogged(2);
-                }
-                if (res.data.status === 'ok') {
-                    setLogged(true);
                     setAuthName(res.data.name);
+                    if (roles.length) {
+                        if (roles.includes(res.data.role)) {
+                            setLogged(1);
+                        } else {
+                            setLogged(3);
+                        }
+
+                    } else {
+                        setLogged(1);
+                    }
                 } else {
-                    setLogged(false);
                     setAuthName(null);
+                    if (roles.length) {
+                        setLogged(2);
+                    } else {
+                        setLogged(1);
+                    }
                 }
             });
-    }, [rote]);
-
+    }, [route]);
 
     if (null === logged) {
         return <Loader />
@@ -51,7 +52,7 @@ function Auth({ children, roles }) {
     if (2 === logged) {
         return  (
             <>
-                {children}
+                <Login />
             </>
         )
     }
@@ -61,20 +62,6 @@ function Auth({ children, roles }) {
             <RoleError />
         )
     }
-
-    if (true === logged) {
-        return (
-            <>
-                {children}
-            </>
-        )
-    }
-    if (false === logged) {
-        return (
-            <Login />
-        )
-    }
-
 }
 
 export default Auth;
