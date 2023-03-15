@@ -75,15 +75,29 @@ app.get('/login', (req, res) => {
   if (user) {
     res.json({
       status: 'ok',
-      name: user.name
+      name: user.name,
+      role: user.role
     });
   } else {
     res.json({
       status: 'error',
     });
   }
+});
 
 
+app.delete('/users/:id', (req, res) => {
+  let allData = fs.readFileSync('./data/users.json', 'utf8');
+  allData = JSON.parse(allData);
+  const userToDelete = allData.find(d => req.params.id === d.id);
+  if (userToDelete.role === 'admin') {
+    res.status(400).json({});
+  } else {
+    let deletedData = allData.filter(d => req.params.id !== d.id);
+    deletedData = JSON.stringify(deletedData);
+    fs.writeFileSync('./data/users.json', deletedData, 'utf8');
+    res.json({ message: { text: 'The User was deleted', 'type': 'danger' } });
+  }
 });
 
 
