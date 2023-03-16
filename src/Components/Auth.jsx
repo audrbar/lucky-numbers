@@ -2,23 +2,28 @@ import { useContext, useEffect } from 'react';
 import axios from 'axios';
 import Loader from "./Loader";
 import Login from "./Login";
-import RoleError from "./RoleError";
 import { Global } from './Global';
+import RoleError from './RoleError';
 
 function Auth({ children, roles }) {
 
-    const { route, setAuthName, logged, setLogged } = useContext(Global);
+    const { setAuthRole, setAuthName, logged, setLogged, route, setUpdate, setUpdateUsers } = useContext(Global);
 
 
     useEffect(() => {
         axios.get('http://localhost:3003/login', { withCredentials: true })
             .then(res => {
-                console.log(res.data);
                 if (res.data.status === 'ok') {
                     setAuthName(res.data.name);
-                    if (roles.length) {
-                        if (roles.includes(res.data.role)) {
+                    setAuthRole(res.data.role);
+                    if (roles) {
+                        if (roles.split(',').includes(res.data.role)) {
                             setLogged(1);
+                            if (route === 'numbers') {
+                                setUpdate(Date.now())
+                            } else if (route === 'users') {
+                                setUpdateUsers(Date.now());
+                            }
                         } else {
                             setLogged(3);
                         }
@@ -28,6 +33,7 @@ function Auth({ children, roles }) {
                     }
                 } else {
                     setAuthName(null);
+                    setAuthRole(null);
                     if (roles.length) {
                         setLogged(2);
                     } else {
@@ -35,33 +41,31 @@ function Auth({ children, roles }) {
                     }
                 }
             });
-    }, [route]);
+    }, [roles, route, setUpdate, setUpdateUsers, setLogged, setAuthName, setAuthRole]);
+
 
     if (null === logged) {
         return <Loader />
     }
 
     if (1 === logged) {
-        return  (
+        return (
             <>
                 {children}
             </>
         )
     }
-
     if (2 === logged) {
-        return  (
-            <>
-                <Login />
-            </>
+        return (
+            <Login />
         )
     }
-
     if (3 === logged) {
-        return  (
+        return (
             <RoleError />
         )
     }
+
 }
 
 export default Auth;

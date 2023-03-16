@@ -14,8 +14,10 @@ export const useWrite = _ => {
     if (null === edit) {
       return;
     }
-    axios.put(URL + '/' + edit.action + '/' + edit.id, { number: edit.number })
-      .then(res => setResponse(res.data));
+    axios.put(URL + '/' + edit.action + '/' + edit.id, { number: edit.number }, { withCredentials: true })
+      .then(res => {
+        setResponse(res.data)
+      });
 
   }, [edit]);
 
@@ -23,7 +25,7 @@ export const useWrite = _ => {
     if (null === create) {
       return;
     }
-    axios.post(URL, create)
+    axios.post(URL, create, { withCredentials: true })
       .then(res => setResponse(res.data));
 
   }, [create]);
@@ -32,7 +34,7 @@ export const useWrite = _ => {
     if (null === destroy) {
       return;
     }
-    axios.delete(URL + '/' + destroy.id)
+    axios.delete(URL + '/' + destroy.id, { withCredentials: true })
       .then(res => setResponse(res.data));
 
   }, [destroy]);
