@@ -59,7 +59,7 @@ export const GlobalProvider = ({ children }) => {
 
 
     const logOut = _ => {
-        axios.post('http://localhost:3005ß/logout', {}, { withCredentials: true })
+        axios.post('http://localhost:3005/logout', {}, { withCredentials: true })
             .then(res => {
                 setLogged(false);
                 setAuthName(false);
