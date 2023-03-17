@@ -10,7 +10,7 @@ function Auth({ children }) {
 
 
     useEffect(() => {
-        axios.get('http://localhost:3003/login', { withCredentials: true })
+        axios.get('http://localhost:3005/login', { withCredentials: true })
             .then(res => {
                 console.log(res.data);
                 if (res.data.status === 'ok') {
