@@ -6,14 +6,14 @@ function CookieMonster() {
     const [text, setText] = useState('');
 
     const set = _ => {
-        axios.post('http://localhost:3003/cookie', {text}, { withCredentials: true })
+        axios.post('http://localhost:3005/cookie', { text }, { withCredentials: true })
             .then(res => {
                 console.log(res.data);
             });
     }
 
     const del = _ => {
-        axios.post('http://localhost:3003/cookie', {delete: true}, { withCredentials: true })
+        axios.post('http://localhost:3005/cookie', { delete: true }, { withCredentials: true })
             .then(res => {
                 console.log(res.data);
             });

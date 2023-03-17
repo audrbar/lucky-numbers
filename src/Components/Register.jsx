@@ -26,7 +26,7 @@ function Register() {
             return;
         }
 
-        axios.post('http://localhost:3003/register', { name, psw }, { withCredentials: true })
+        axios.post('http://localhost:3005/register', { name, psw }, { withCredentials: true })
             .then(res => {
                 console.log(res.data);
                 if (res.data.status === 'ok') {

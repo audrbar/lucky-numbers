@@ -6,10 +6,10 @@ const { v4: uuidv4 } = require('uuid');
 const md5 = require('md5');
 
 const app = express();
-const port = 3003;
+const port = 3005;
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'http://localhost:3001',
   credentials: true
 }));
 
