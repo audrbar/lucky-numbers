@@ -9,7 +9,7 @@ import { useWriteUsers } from "../Use/useWriteUsers";
 
 export const Global = createContext();
 
-export const GlobalProvider = ({children}) => {
+export const GlobalProvider = ({ children }) => {
 
     const [response, setCreate, setEdit, setDelete] = useWrite();
     const [list, setUpdate] = useRead();
@@ -32,7 +32,7 @@ export const GlobalProvider = ({children}) => {
         }
         setUpdate(Date.now());
         if (null !== response) {
-            setMessage({text: response.message.text, type: response.message.type});
+            setMessage({ text: response.message.text, type: response.message.type });
         }
     }, [response, setMessage, setUpdate]);
 
@@ -43,10 +43,10 @@ export const GlobalProvider = ({children}) => {
         }
         setUpdateUsers(Date.now());
         if (userResponse.code) {
-            setMessage({text: userResponse.message ? userResponse.message : userResponse.code, type: 'danger'});
+            setMessage({ text: userResponse.message ? userResponse.message : userResponse.code, type: 'danger' });
         }
         else {
-            setMessage({text: userResponse.message.text, type: userResponse.message.type});
+            setMessage({ text: userResponse.message.text, type: userResponse.message.type });
         }
     }, [userResponse, setMessage, setUpdateUsers]);
 
@@ -59,12 +59,12 @@ export const GlobalProvider = ({children}) => {
 
 
     const logOut = _ => {
-        axios.post('http://localhost:3003/logout', {}, { withCredentials: true })
-        .then(res => {
-            setLogged(false);
-            setAuthName(false);
-            setRoute('home');
-        });
+        axios.post('http://localhost:3005ß/logout', {}, { withCredentials: true })
+            .then(res => {
+                setLogged(false);
+                setAuthName(false);
+                setRoute('home');
+            });
     }
 
     return (
